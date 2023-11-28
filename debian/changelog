@@ -1,3 +1,9 @@
+onboard (1.4.1.1-deepin5) unstable; urgency=medium
+
+  * community/beige version 14.1.1-deepin1 > 1.4.1-5.
+
+ -- LiChengGang <lichenggang@uniontech.com>  Tue, 28 Nov 2023 14:14:59 +0800
+
 onboard (1.4.1-5) unstable; urgency=medium
 
   [ Mike Gabriel ]
