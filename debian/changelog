@@ -1,3 +1,9 @@
+onboard (1.4.1-6deepin1) unstable; urgency=medium
+
+  * Build-Depends on iso-codes for build tests.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 04 Jul 2024 10:25:39 +0800
+
 onboard (1.4.1-6) unstable; urgency=medium
 
   [ Bo YU ]
