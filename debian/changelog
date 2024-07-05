@@ -1,3 +1,9 @@
+onboard (1.4.1.1-deepin6) unstable; urgency=medium
+
+  * Upload 1.4.1.1-deepin6 to avoid downgrading.
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 05 Jul 2024 07:16:29 +0200
+
 onboard (1.4.1-6deepin1) unstable; urgency=medium
 
   * Build-Depends on iso-codes for build tests.
