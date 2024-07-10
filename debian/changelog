@@ -1,3 +1,10 @@
+onboard (1.4.1.1-deepin7) unstable; urgency=medium
+
+  * Ensure Python GIL is acquired and released properly in event handlers
+    Bug: https://github.com/linuxdeepin/developer-center/issues/9622
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Wed, 10 Jul 2024 14:10:23 +0800
+
 onboard (1.4.1.1-deepin6) unstable; urgency=medium
 
   * Upload 1.4.1.1-deepin6 to avoid downgrading.
