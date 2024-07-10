@@ -1,0 +1,58 @@
+Description: Ensure Python GIL is acquired and released properly in event handlers
+Author: Tianyu Chen <sweetyfish@deepin.org>
+Origin: https://github.com/deepin-community/onboard/pull/4
+Bug-Deepin: https://github.com/linuxdeepin/developer-center/issues/9622
+Forwarded: no
+Last-Update: 2024-07-10
+---
+This patch header follows DEP-3: http://dep.debian.net/deps/dep3/
+--- a/Onboard/osk/osk_devices.c
++++ b/Onboard/osk/osk_devices.c
+@@ -417,6 +417,7 @@ osk_devices_call_event_handler_device (O
+                                        int         source_id
+ )
+ {
++    PyGILState_STATE gstate = PyGILState_Ensure ();
+     OskDeviceEvent *ev = new_device_event();
+     if (ev)
+     {
+@@ -430,6 +431,7 @@ osk_devices_call_event_handler_device (O
+ 
+         Py_DECREF(ev);
+     }
++    PyGILState_Release (gstate);
+ }
+ 
+ static void
+@@ -449,6 +451,7 @@ osk_devices_call_event_handler_pointer (
+                                         unsigned int time
+ )
+ {
++    PyGILState_STATE gstate = PyGILState_Ensure ();
+     OskDeviceEvent *ev = new_device_event();
+     if (ev)
+     {
+@@ -471,6 +474,7 @@ osk_devices_call_event_handler_pointer (
+ 
+         Py_DECREF(ev);
+     }
++    PyGILState_Release (gstate);
+ }
+ 
+ static void
+@@ -483,6 +487,7 @@ osk_devices_call_event_handler_key (OskD
+                                     int         keyval
+ )
+ {
++    PyGILState_STATE gstate = PyGILState_Ensure ();
+     OskDeviceEvent *ev = new_device_event();
+     if (ev)
+     {
+@@ -498,6 +503,7 @@ osk_devices_call_event_handler_key (OskD
+ 
+         Py_DECREF(ev);
+     }
++    PyGILState_Release (gstate);
+ }
+ 
+ static int
