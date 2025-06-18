@@ -1,27 +1,52 @@
-onboard (1.4.1.1-deepin8) unstable; urgency=medium
+onboard (1.4.1-10) unstable; urgency=medium
 
-  * update version for rebuild.
+  [ Bo YU ]
+  * Refresh 1013_slow-down-tests-for-riscv64.patch to increase sleep time to
+    pass test. (Closes: #1092871)
 
- -- liujianqiang <liujianqiang@uniontech.com>  Thu, 05 Jun 2025 21:34:06 +0800
+ -- Mike Gabriel <sunweaver@debian.org>  Wed, 15 Jan 2025 21:40:26 +0100
 
-onboard (1.4.1.1-deepin7) unstable; urgency=medium
+onboard (1.4.1-9) unstable; urgency=medium
 
-  * Ensure Python GIL is acquired and released properly in event handlers
-    Bug: https://github.com/linuxdeepin/developer-center/issues/9622
+  * debian/patches:
+    + Add 1013_slow-down-tests-for-riscv64.patch. Give the unit test / onboard
+      startup more time before killing onboard again. Fixes unit tests on slower
+      architectures such as RISCV64. (Closes: #1076820). Thanks to Aurelien
+      Jarno for debugging this and for providing a patch.
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Wed, 10 Jul 2024 14:10:23 +0800
+ -- Mike Gabriel <sunweaver@debian.org>  Wed, 24 Jul 2024 07:54:48 +0200
 
-onboard (1.4.1.1-deepin6) unstable; urgency=medium
+onboard (1.4.1-8) unstable; urgency=medium
 
-  * Upload 1.4.1.1-deepin6 to avoid downgrading.
+  * debian/patches:
+    + Add 1012_thread-state.patch cherry-picked from Voidlinux. Wrap device
+      events into PyGILState_Ensure / PyGILState_Release. (Closes: #1076120).
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Fri, 05 Jul 2024 07:16:29 +0200
+ -- Mike Gabriel <sunweaver@debian.org>  Mon, 15 Jul 2024 14:36:23 +0000
 
-onboard (1.4.1-6deepin1) unstable; urgency=medium
+onboard (1.4.1-7) unstable; urgency=medium
 
-  * Build-Depends on iso-codes for build tests.
+  [ Jeremy Bícha ]
+  * debian/control:
+    + Add Build-Depends: iso-codes for build tests
 
- -- Tianyu Chen <sweetyfish@deepin.org>  Thu, 04 Jul 2024 10:25:39 +0800
+  [ Bo YU ]
+  * debian/rules:
+    + Export LC_ALL when building. (Closes: #1071098).
+
+  [ Mike Gabriel ]
+  * debian/patches:
+    + Trivial rebase of 1008_enable-tests-during-build.patch.
+    + Update 1005_fix-invalid-escape-sequences.patch. Add more double-
+      backslashed regexp escape sequences. (Closes: #1069988).
+    + Update 1005_fix-invalid-escape-sequences.patch. Switch to raw
+      strings where possible.
+    + Merge patch 1009 into patch 1005. Both have been about regexp fixes /
+      escape sequences in regexps.
+  * debian/control:
+    + Add to B-D: locales-all (for unit tests).
+
+ -- Mike Gabriel <sunweaver@debian.org>  Wed, 10 Jul 2024 10:25:05 +0200
 
 onboard (1.4.1-6) unstable; urgency=medium
 
