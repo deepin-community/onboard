@@ -1,3 +1,12 @@
+onboard (1.4.1.1-deepin9) unstable; urgency=medium
+
+  * debian/patches:
+    + Add Switch-to-using-PyUnicode_AsWideCharString.patch. As the 'u' format
+      is removed in python 3.12.
+      https://github.com/dr-ni/onboard/commit/b00a15ca3bb2b92c92b03251d2438a3b07239889
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Wed, 18 Jun 2025 11:20:51 +0800
+
 onboard (1.4.1.1-deepin8) unstable; urgency=medium
 
   * update version for rebuild.
