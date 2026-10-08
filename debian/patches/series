@@ -14,3 +14,4 @@
 1011_python-distutils-byebye.patch
 Ensure-Python-GIL-handling-in-event-handlers.patch
 Switch-to-using-PyUnicode_AsWideCharString.patch
+0017-osk-don-t-redefine-bool-and-use-the-standard-one-ins.patch

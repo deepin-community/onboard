@@ -1,0 +1,38 @@
+From: =?utf-8?b?VmxhZGltw61yIMSMdW7DoXQ=?= <vladimir.cunat@nic.cz>
+Date: Wed, 18 Jun 2025 16:19:09 +0200
+Subject: osk: don't redefine bool and use the standard one instead
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+In nixos/nixpkgs we now got these errors:
+```
+Onboard/osk/osk_module.h:28:16: error: expected identifier before numeric constant
+   28 | typedef enum { false, true } bool;
+      |                ^~~~~
+Onboard/osk/osk_module.h:28:30: error: expected ‘;’, identifier or ‘(’ before ‘_Bool’
+   28 | typedef enum { false, true } bool;
+      |                              ^~~~
+```
+which indicates that someone (a header included before `osk_module.h`, perhaps transitively)
+most likely included `stdbool.h` and thus this typedef got broken.
+But I haven't tried to analyze the cause that much.
+
+Either way, the line I'm deleting was rather ugly and fragile.
+---
+ Onboard/osk/osk_module.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Onboard/osk/osk_module.h b/Onboard/osk/osk_module.h
+index d049df4..f859dd4 100644
+--- a/Onboard/osk/osk_module.h
++++ b/Onboard/osk/osk_module.h
+@@ -27,7 +27,7 @@
+ #include <Python.h>
+ #include <structmember.h>
+ 
+-typedef enum { false, true } bool;
++#include <stdbool.h>
+ 
+ /**
+  * Python2 to Python3 conversion
