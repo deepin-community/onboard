@@ -1,3 +1,19 @@
+onboard (1.4.1.1-deepin12) unstable; urgency=medium
+
+  * debian/rules:
+    + Append -fvisibility=hidden to CFLAGS/CXXFLAGS. Python extensions
+      must not export their internal symbols: with LTO the sw64
+      toolchain addresses exported global data objects gp-relative,
+      which the sw64 linker rejects ("gp-relative relocation against
+      dynamic symbol"). deepin11 fixed this for __osk_error in the osk
+      extension, but the C++ lm extension exports many more data
+      symbols (vtables, statics, e.g. _ZTV13LanguageModel and
+      _accent_transform). Hiding visibility keeps them local to the
+      modules; PyInit_* stays exported through PyMODINIT_FUNC's
+      built-in default visibility.
+
+ -- lichenggang <lichenggang@uniontech.com>  Fri, 09 Oct 2026 17:13:44 +0800
+
 onboard (1.4.1.1-deepin11) unstable; urgency=medium
 
   * debian/patches:
