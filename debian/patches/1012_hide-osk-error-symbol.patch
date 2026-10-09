@@ -1,0 +1,35 @@
+Description: Hide __osk_error symbol
+ The osk extension's module error object is a global with default
+ visibility, so it is exported from the shared object. When LTO merges
+ the extension into a single unit (debian/rules sets optimize=+lto),
+ sw64 gcc accesses it with gp-relative addressing, which the linker
+ rejects with "gp-relative relocation against dynamic symbol
+ __osk_error". The object is purely internal to the extension, so give
+ it hidden visibility; it then stays local to the module and is no
+ longer a dynamic symbol.
+Author: lichenggang <lichenggang@uniontech.com>
+Last-Update: 2026-10-09
+Forwarded: not-needed
+
+--- a/Onboard/osk/osk_module.c
++++ b/Onboard/osk/osk_module.c
+@@ -22,7 +22,7 @@
+
+ #include "osk_module.h"
+
+-PyObject *__osk_error;
++PyObject *__osk_error __attribute__((visibility("hidden")));
+
+ static PyMethodDef osk_methods[] = {
+     { NULL, NULL, 0, NULL }
+--- a/Onboard/osk/osk_module.h
++++ b/Onboard/osk/osk_module.h
+@@ -171,7 +171,7 @@ void __##__type_name##_register_type (PyObject *module) \
+  */
+ #define OSK_FINISH_DEALLOC(o) (Py_TYPE(o)->tp_free ((PyObject *) (o)))
+
+-extern PyObject *__osk_error;
++extern PyObject *__osk_error __attribute__((visibility("hidden")));
+
+ void    __osk_virtkey_register_type      (PyObject *module);
+ void    __osk_audio_register_type        (PyObject *module);

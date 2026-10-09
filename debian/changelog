@@ -1,3 +1,15 @@
+onboard (1.4.1.1-deepin11) unstable; urgency=medium
+
+  * debian/patches:
+    + Add 1012_hide-osk-error-symbol.patch. Give the module error object
+      __osk_error hidden visibility. With LTO, sw64 gcc addresses it
+      gp-relative while it remains an exported dynamic symbol of the osk
+      extension, which the sw64 linker rejects ("gp-relative relocation
+      against dynamic symbol __osk_error"). Hiding it keeps it local to
+      the module and fixes the build.
+
+ -- lichenggang <lichenggang@uniontech.com>  Fri, 09 Oct 2026 15:47:07 +0800
+
 onboard (1.4.1.1-deepin10) unstable; urgency=medium
 
   * Use stdbool.h instead of redefining bool
